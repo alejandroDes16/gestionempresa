@@ -45,6 +45,12 @@ public class ProviderController {
         return new ResponseEntity<>(provider, HttpStatus.OK);
     }
 
+    @GetMapping("/listSearch/{keyword}")
+    public ResponseEntity<List<Provider>> listSearch(@PathVariable ("keyword") String keyword){
+        List<Provider> list = providerService.getAllMatch(keyword);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProviderDto providerDto){
         if(StringUtils.isBlank(providerDto.getName())){
