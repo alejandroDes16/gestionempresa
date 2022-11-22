@@ -63,7 +63,7 @@ public class ProductController {
         if(StringUtils.isBlank(productDto.getRef())){
             return new ResponseEntity(new Message("La referencia es obligatoria"), HttpStatus.BAD_REQUEST);
         }
-        if(productDto.getPrecio().isNaN() || productDto.getPrecio() < 0){
+        if(productDto.getPrecio() == null || productDto.getPrecio() < 0){
             return new ResponseEntity(new Message("El precio no puede ser inferior a cero"), HttpStatus.BAD_REQUEST);
         }
         if(productService.existsByRef(productDto.getRef())){
@@ -96,7 +96,7 @@ public class ProductController {
         if(productService.existsByRef(productDto.getRef()) && productService.getByRef(productDto.getRef()).get().getId() != id){
             return new ResponseEntity(new Message("La referencia ya existe en el sistema"), HttpStatus.BAD_REQUEST);
         }
-        if(productDto.getPrecio(). || productDto.getPrecio() < 0){
+        if(productDto.getPrecio() == null || productDto.getPrecio() < 0){
             return new ResponseEntity(new Message("El precio no puede ser inferior a cero"), HttpStatus.BAD_REQUEST);
         }
 
