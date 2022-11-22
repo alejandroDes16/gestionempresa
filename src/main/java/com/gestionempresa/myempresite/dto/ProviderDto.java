@@ -14,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class ProviderDto {
 
+    private Integer id;
     @NotBlank
     private String name;
     @NotBlank

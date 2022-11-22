@@ -15,8 +15,10 @@ public interface ProviderRepository extends JpaRepository<Provider, Integer> {
     @Query("SELECT p FROM Provider p WHERE"
             + " CONCAT(p.id,p.name,p.nif,p.address, p.numberPhone, p.personContact, p.emailContact)"
             + " LIKE %?1%")
+
     List<Provider> findAllMatch(String keyword);
 
+    Optional<Provider> findByNif(String nif);
     boolean existsByNif(String nif);
 
 }

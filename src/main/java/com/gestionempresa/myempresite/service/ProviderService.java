@@ -3,6 +3,7 @@ package com.gestionempresa.myempresite.service;
 import com.gestionempresa.myempresite.dto.ProviderDto;
 import com.gestionempresa.myempresite.entity.Provider;
 import com.gestionempresa.myempresite.repository.ProviderRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +22,16 @@ public class ProviderService {
         return providerRepository.findAll();
     }
 
-    public Optional<Provider> getOne(int id){
+    public Optional<Provider> getOne(Integer id){
         return providerRepository.findById(id);
     }
 
     public Optional<Provider> getByName(String name){
         return providerRepository.findByName(name);
+    }
+
+    public Optional<Provider> getByNif(String nif){
+        return providerRepository.findByNif(nif);
     }
 
     public void save(Provider provider){
@@ -44,7 +49,7 @@ public class ProviderService {
         return providerRepository.findAll();
     }
 
-    public boolean existsById(int id){
+    public boolean existsById(Integer id){
         return providerRepository.existsById(id);
     }
 
@@ -55,4 +60,6 @@ public class ProviderService {
     public boolean existsByNif(String nif){
         return providerRepository.existsByNif(nif);
     }
+
+
 }

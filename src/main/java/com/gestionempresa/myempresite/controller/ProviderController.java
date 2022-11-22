@@ -67,6 +67,7 @@ public class ProviderController {
         }
 
         Provider newProvider = new Provider(
+                providerDto.getId(),
                 providerDto.getName(),
                 providerDto.getNif(),
                 providerDto.getAddress(),
@@ -75,11 +76,12 @@ public class ProviderController {
                 providerDto.getEmailContact());
 
         providerService.save(newProvider);
+
         return new ResponseEntity(new Message("Proveedor registrado"), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ProviderDto providerDto){
+    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody ProviderDto providerDto){
         if(!providerService.existsById(id)){
             return new ResponseEntity(new Message("No existe"), HttpStatus.NOT_FOUND);
         }
@@ -92,7 +94,7 @@ public class ProviderController {
         if(StringUtils.isBlank(providerDto.getNif())){
             return new ResponseEntity(new Message("El número de identificación fiscal es obligatorio"), HttpStatus.BAD_REQUEST);
         }
-        if (providerService.existsByNif(providerDto.getNif())){
+        if (providerService.existsByNif(providerDto.getNif()) && providerService.getByNif(providerDto.getNif()).get().getId() != id){
             return new ResponseEntity(new Message("El número de identificación fiscal del proveedor ya existe"), HttpStatus.BAD_REQUEST);
         }
 
